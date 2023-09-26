@@ -49,7 +49,7 @@ public class FilesController {
     @GetMapping("/view2")
     public String view2(Model model) {
 
-        return "javascriptview";
+        return "home";
     }
 
 }
