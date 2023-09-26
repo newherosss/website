@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        body {
+            background-color: #f4f4f4;
+            font-family: Arial, sans-serif;
+        }
+        #authors {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+        }
+        #authors li {
+            background-color: #fff;
+            margin: 20px;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        #authors li h2 {
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+<ul id="authors"></ul>
+
+<script>
+
+    function startShowingMessage(){
+        setInterval(async ()=>
+        {
+            try {
+                const res = await fetch('http://127.0.0.1:8080/view1');
+                const data = await res.json();
+                const list = document.createDocumentFragment();
+
+                if (!res.ok) {
+                    console.log('Problem');
+                    return;
+                }
+                console.log(data);
+                let authors = data;
+                authors.map(function(author) {
+                    let li = document.createElement('li');
+                    let name = document.createElement('h2');
+                    let email = document.createElement('div');
+
+                    name.innerHTML = `${author.id}`;
+                    email.innerHTML = "<img src='/images/"+ `${author.id}` +"'>"
+
+                    li.appendChild(name);
+                    li.appendChild(email);
+                    list.appendChild(li);
+                });
+
+                const ul = document.getElementById('authors');
+                while (ul.firstChild) {
+                    ul.removeChild(ul.firstChild);
+                }
+                ul.append(list);
+
+                console.log(document.getElementById("authors").getElementsByTagName("li").length);
+
+            } catch (error) {
+                console.log(error);
+            }
+        },3000)
+    }
+
+    window.onload = startShowingMessage;
+
+</script>
+</body>
+</html>

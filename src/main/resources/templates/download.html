@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        body {
+            padding: 0;
+            margin: 0;
+            background-image: url('https://example.com/path-to-your-image.jpg');
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-size: cover;
+        }
+        h2, h4 {
+            text-align: center;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        input[type="file"] {
+            margin-top: 20px;
+            padding: 10px;
+            border-radius: 5px;
+            border: none;
+            cursor: pointer;
+            background-image: linear-gradient(to right, #6a11cb 0%, #2575fc 100%);
+            color: white;
+            transition: all .2s ease-in-out;
+        }
+        input[type="file"]:hover {
+            transform: scale(1.05);
+        }
+        @media (max-width: 600px) {
+            h2, h4 {
+                font-size: 18px;
+            }
+            input[type="file"] {
+                width: 80%;
+            }
+        }
+    </style>
+    <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js" crossorigin></script>
+</head>
+<body>
+<h2>파일 업로드</h2>
+
+<form action="/posttester" method="post" enctype="multipart/form-data">
+    <h4>파일 업로드가 되엇다</h4>
+    <input type="file" name="file">
+    <input type="submit"/>
+</form>
+
+<div id="root"></div>
+</body>
+</html>

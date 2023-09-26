@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+
+</head>
+<body>
+<script>
+  window.onload = function(){
+    setInterval(setClock,1000);
+  }
+</script>
+<div th:each="file : ${postList}">
+  <h2 th:text="${file.id}"></h2>
+  <img  th:src="|/images/${file.id}|" width="150" height="150">
+</div>
+
+</body>
+</html>

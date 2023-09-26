@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/css/mobile.css">
+    <link rel="stylesheet" href="/static/css/pc.css">
+    <title>yours(:o)nly</title>
+</head>
+<body>
+
+
+<div id="wrap">
+    <section class="s1">
+        <div class="my my1">
+            
+            <div class="txt1">이모티콘으로 제작하고 싶은 일상사진을<br>아래 상자로 Drop!</div>
+            <form action="/posttester" method="post" enctype="multipart/form-data">
+            <div class="dropBox">
+                <h1> 바로 요기로 드롭! </h1>
+            </div>
+                <input type="file" name="file">
+                <input type="submit"/>
+            </form>
+
+            </div>
+        </div><!--my-->       
+    </section><!--s1-->
+
+    <section class="s2">
+        <div class="my my2">
+            <img src="/static/images/Asset 1.png" alt=""><br>
+            <p class="result" style="margin-top: 30px;"></p>
+        </div><!--my2-->
+        
+    </section><!--s2-->
+
+
+    <section class="s3">
+        <p class="information">
+            모바일 접속불가<br>
+        </p><!--information-->
+
+        <div class="my my3">
+            <div class="txt1">
+                이모티콘 3종 생성 완료!
+            </div>
+
+            <div class="imgBox">
+                <ul id="authors"></ul>
+            </div>    
+        </div><!--my3-->       
+
+        <footer>
+            <p class="fp">
+                Metaverse Academy 2nd 9월 융합 프로젝트 ~ 
+                YOURS(:O)NLY | AI : 김병철  손지혜  이한빈 | 서버개발 : 김대철  박소연  추민경 | 기획 : 이건영 이은지
+
+             </p>
+        </footer>
+    </section><!--s3-->
+
+
+    <section class="s4">
+        <div class="my my4">
+            <div class="txt1"></div>
+
+        </div><!--my4-->
+
+    </section><!--s4-->
+
+
+    <section class="s5">
+        <div class="my my5">
+            <div class="txt1"></div>
+        </div><!--my5-->
+        
+        <footer>
+            <p class="fp">
+                Metaverse Academy 2nd 9월 융합 프로젝트 ~ 
+                YOURS(:O)NLY | AI : 김병철  손지혜  이한빈 | 서버개발 : 김대철  박소연  추민경 
+
+             </p>
+        </footer>
+    </section><!--s5-->
+    
+</div>
+
+
+<script>
+
+    function startShowingMessage(){
+        setInterval(async ()=>
+        {
+            try {
+                const res = await fetch('http://127.0.0.1:8080/view1');
+                const data = await res.json();
+                const list = document.createDocumentFragment();
+
+                if (!res.ok) {
+                    console.log('Problem');
+                    return;
+                }
+                console.log(data);
+                let authors = data;
+                authors.map(function(author) {
+                    let li = document.createElement('li');
+                    let name = document.createElement('h2');
+                    let email = document.createElement('div');
+
+                    email.innerHTML = "<img id='output' src='/images/"+ `${author.id}` +"'>"
+
+                    li.appendChild(email);
+                    list.appendChild(li);
+                });
+
+                const ul = document.getElementById('authors');
+                while (ul.firstChild) {
+                    ul.removeChild(ul.firstChild);
+                }
+                ul.append(list);
+
+                console.log(document.getElementById("authors").getElementsByTagName("li").length);
+
+            } catch (error) {
+                console.log(error);
+            }
+        },3000)
+    }
+
+    window.onload = startShowingMessage;
+
+</script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    <script src="/static/js/jquery-3.6.0.min.js"></script>
+    <script src="/static/js/jquery.mousewheel.min.js"></script>
+    <script src="/static/js/jquery-ui.min.js"></script>
+    <script src="/static/js/slick.js"></script>
+    <script src="/static/js/main.js"></script>
+</body>
+</html>
